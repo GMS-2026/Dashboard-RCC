@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte Power BI</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f4f7;
+    color: #1f2937;
+    overflow: auto;
+    }
+
+    .encabezado-reporte {
+      width: 100%;
+      height: 76px;
+      background: #00533f;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 8px 14px;
+      gap: 16px;
+    }
+
+    .logo-institucional {
+      height: 54px;
+      max-width: 230px;
+      object-fit: contain;
+      background: #ffffff;
+      padding: 5px 8px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .bloque-titulo {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .titulo-principal {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .subtitulo-linea {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .separador {
+      opacity: 0.85;
+      font-weight: bold;
+    }
+
+    .acciones {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .boton {
+      border: none;
+      background: #ffffff;
+      color: #00533f;
+      padding: 7px 11px;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      height: 31px;
+      line-height: 17px;
+    }
+
+    .boton:hover {
+      background: #d5dde2;
+    }
+
+    .boton-secundario {
+      background: #dbdfe4;
+    }
+
+    .boton-secundario:hover {
+      background: #e2e7f0;
+    }
+
+    .contenedor-reporte {
+      width: 100%;
+      height: calc(100vh - 76px);
+      background: #ffffff;
+    }
+
+    .reporte {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: white;
+    }
+
+    @media print {
+      body {
+        background: white;
+        overflow: visible;
+      }
+
+      .encabezado-reporte {
+        height: 64px;
+        padding: 6px 10px;
+      }
+
+      .acciones {
+        display: none;
+      }
+
+      .logo-institucional {
+        height: 48px;
+        max-width: 145px;
+        padding: 4px 6px;
+      }
+
+      .titulo-principal {
+        font-size: 20px;
+      }
+
+      .subtitulo-linea {
+        font-size: 11px;
+        margin-top: 4px;
+      }
+
+      .contenedor-reporte {
+        height: calc(100vh - 64px);
+      }
+
+      .reporte {
+        height: 100%;
+      }
+
+      @page {
+        size: A4 landscape;
+        margin: 4mm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="encabezado-reporte">
+
+    <img 
+      class="logo-institucional"
+      src="https://www.gob.pe/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTMwOTQ2LCJwdXIiOiJibG9iX2lkIn19--b146f973a426e97b304a28c35b394e047e8693d7/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemVfdG9fbGltaXQiOltudWxsLDQ4XX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--830247c4bafe7cadca50817d8559bf1a09e3aa28/Logo%20PVDes%202023.png"
+      alt="Logo institucional">
+
+    <div class="bloque-titulo">
+      <div class="titulo-principal">
+        Equipo de Monitoreo y Seguimiento de Reconstrucción con Cambios de la GMS
+      </div>
+
+      <div class="subtitulo-linea">
+        <span>Gerencia de Monitoreo y Seguimiento</span>
+        <span class="separador">|</span>
+        <span>Reporte 6</span>
+        <span class="separador">|</span>
+        <span>Fecha de corte: Martes 08 de julio del 2026</span>
+      </div>
+    </div>
+
+    <div class="acciones">
+      <button class="boton" onclick="imprimirReporte()">
+        Imprimir PDF
+      </button>
+
+      <button class="boton boton-secundario" onclick="location.reload()">
+        Recargar
+      </button>
+    </div>
+
+  </header>
+
+  <main class="contenedor-reporte">
+    <iframe 
+      id="reportePowerBI"
+      class="reporte"
+      title="Reporte Power BI"
+      src="https://app.powerbi.com/view?r=eyJrIjoiZWQ1NjBlY2YtZjM2YS00MjhiLWIyNTktMmI5NzBlN2RmOGY0IiwidCI6Ijc4OTJjMDFiLWNiMmYtNGU2NC1iZGYwLWE5ZWFhMWFhYTdkNCIsImMiOjR9"
+      allowfullscreen="true">
+    </iframe>
+  </main>
+
+  <script>
+  function imprimirReporte() {
+    const iframe = document.getElementById("reportePowerBI");
+
+    try {
+      iframe.focus();
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+    } catch (error) {
+      window.print();
+    }
+  }
+  </script>
+
+</body>
+</html>
